@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healing Mind | Career</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
+</head>
+<body>
+
+    <!-- REUSABLE HEADER -->
+    <header>
+        <div class="header-left"><div class="logo">Healing Mind</div></div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="team.html">Team</a>
+            <a href="career.html" style="color: var(--accent);">Career</a>
+            <a id="assessmentTabNav" href="assessment.html" style="display:none;">Assessments</a>
+            <button class="login-btn" id="loginHeaderBtn" onclick="window.location.href='login.html'">Login</button>
+        </nav>
+    </header>
+
+    <!-- REUSABLE WIDGETS -->
+    <div class="fixed-appointment" onclick="handleBookingClick()">Book Appointment</div>
+    <div class="fixed-assessment-tab" onclick="window.location.href='assessment.html'">Assessments & Tests</div>
+    <div class="fixed-chat" onclick="toggleChat()">Chat with Us</div>
+
+    <!-- CHAT BOT HTML -->
+    <div class="chat-widget" id="chatWidget">
+        <div class="chat-header">Healing Mind Support</div>
+        <div class="chat-body" id="chatBody"><p><strong>Bot:</strong> Hello! How can we help you today?</p></div>
+        <div class="chat-input">
+            <input type="text" id="chatMsg" placeholder="Type a message...">
+            <button onclick="sendChat()">Send</button>
+        </div>
+    </div>
+
+    <!-- MAIN CAREER CONTENT -->
+    <main>
+        <section class="section">
+            <h2 style="color: var(--primary); text-align: center; font-size: 2.5rem;">Join Healing Mind</h2>
+            <p style="text-align: center; color: #666; max-width: 600px; margin: 0 auto 40px auto;">We are always looking for passionate psychologists and administrative staff who share our vision for accessible, scientific mental health care.</p>
+            
+            <div style="background: var(--bg-light); padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 600px; margin: 0 auto; border-top: 4px solid var(--accent);">
+                <!-- action points to /api/career (Python) or submit.php (PHP) depending on what backend you chose -->
+                <form action="/api/career" method="POST" enctype="multipart/form-data" style="width: 100%; max-width: 100%;">
+                    
+                    <div style="display: flex; gap: 15px;">
+                        <input type="text" name="name" placeholder="Full Name" required style="flex: 1;">
+                        <input type="number" name="age" placeholder="Age" required style="width: 100px;">
+                    </div>
+                    
+                    <div style="display: flex; gap: 15px;">
+                        <input type="tel" name="phone" placeholder="Contact Number" required style="flex: 1;">
+                        <input type="email" name="email" placeholder="Email Address" required style="flex: 1;">
+                    </div>
+
+                    <input type="text" name="education" placeholder="Highest Education (e.g., MSc Clinical Psychology)" required>
+                    <input type="text" name="graduate_from" placeholder="Graduated From (University/College)" required>
+                    <input type="text" name="experience" placeholder="Years of Experience" required>
+                    
+                    <label style="color: var(--primary); font-weight: bold; margin-top: 10px;">Attach CV (PDF/DOCX):</label>
+                    <input type="file" name="cv" accept=".pdf,.doc,.docx" required style="background: var(--white);">
+                    
+                    <textarea name="cover_letter" rows="5" placeholder="Brief Cover Letter..." required></textarea>
+                    
+                    <button type="submit" class="submit-btn" style="margin-top: 15px; font-size: 1.1rem;">Submit Application</button>
+                </form>
+            </div>
+        </section>
+
+<!-- FOOTER SECTION -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            
+            <!-- Column 1: Website Links -->
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="team.html">Our Team</a>
+                <a href="career.html">Careers</a>
+                <a href="assessment.html">Psychological Assessments</a>
+                <a href="login.html">Login / Register</a>
+            </div>
+
+            <!-- Column 2: Contact Information -->
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <p><strong>Office Address:</strong><br>Healing Mind Psychology Center<br>405 Wellness Avenue, Block C<br>City District, 10001</p>
+                <p><strong>Email:</strong><br><a href="mailto:support@healingmind.com">support@healingmind.com</a></p>
+                <p><strong>Phone:</strong><br><a href="tel:+919876543210">+91 98765 43210</a></p>
+                <p><strong>Location Options:</strong><br>In-person sessions & Secure Online Video Counseling available globally.</p>
+            </div>
+
+            <!-- Column 3: National Helplines (Vertical Scroll) -->
+            <div class="footer-col">
+                <h4>National Helplines (24/7)</h4>
+                <p style="font-size: 0.8rem; color: #aaa; margin-top: -10px;">Hover to pause</p>
+                
+                <div class="scrolling-wrapper">
+                    <div class="scrolling-content">
+                        <div class="helpline-item">
+                            <strong>Mental Health Helpline (KIRAN):</strong> 
+                            1800-599-0019
+                        </div>
+                        <div class="helpline-item">
+                            <strong>DISHA (Mental Health Support):</strong> 
+                            1056
+                        </div>
+                        <div class="helpline-item">
+                            <strong>Suicide Prevention (AASRA):</strong> 
+                            +91-9820466726
+                        </div>
+                        <div class="helpline-item">
+                            <strong>Women in Distress:</strong> 
+                            1091
+                        </div>
+                        <div class="helpline-item">
+                            <strong>Childline India:</strong> 
+                            1098
+                        </div>
+                        <div class="helpline-item">
+                            <strong>Police / Emergency:</strong> 
+                            112 / 100
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        <div class="footer-bottom">
+            &copy; 2026 Healing Mind Psychological Counseling. Ethical, Confidential, Scientific.
+        </div>
+    </footer>
+    </main>
+
+</body>
+</html>

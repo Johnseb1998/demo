@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment Center | Healing Mind</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="auth.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="header-left"><div class="logo">Healing Mind</div></div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a id="assessmentTabNav" href="assessment_hub.html" style="color: var(--accent);">Assessments</a>
+            <button class="login-btn" id="loginHeaderBtn">Login</button>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section">
+            <h2 style="color: var(--primary); text-align: center;">Clinical Assessment Hub</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 40px;">Select a tool to begin the evaluation.</p>
+            
+            <div style="max-width: 900px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+                
+                <!-- Link to IQ Profiler -->
+                <div class="therapy-box" style="background: var(--white);">
+                    <h4 style="color: var(--primary); margin-top: 0;">Intelligence Profiler</h4>
+                    <p style="font-size: 0.85rem; color: #666; height: 40px;">MISIC / WISC scoring module.</p>
+                    <button class="submit-btn" style="width:100%" onclick="window.location.href='iq_profiler.html'">Launch</button>
+                </div>
+
+                <!-- Link to BAI -->
+                <div class="therapy-box" style="background: var(--white);">
+                    <h4 style="color: var(--primary); margin-top: 0;">Beck Anxiety Inventory</h4>
+                    <p style="font-size: 0.85rem; color: #666; height: 40px;">21-question anxiety screener.</p>
+                    <button class="submit-btn" style="width:100%" onclick="window.location.href='bai.html'">Launch</button>
+                </div>
+
+                <!-- Link to GAD-7 -->
+                <div class="therapy-box" style="background: var(--white);">
+                    <h4 style="color: var(--primary); margin-top: 0;">GAD-7</h4>
+                    <p style="font-size: 0.85rem; color: #666; height: 40px;">General anxiety tracker.</p>
+                    <button class="submit-btn" style="width:100%" onclick="window.location.href='gad7.html'">Launch</button>
+                </div>
+
+<!-- Link to MCMI-III Assessment -->
+<div class="therapy-box" style="background: var(--white);">
+    <h4 style="color: var(--primary); margin-top: 0;">MCMI-III Assessment</h4>
+    <p style="font-size: 0.85rem; color: #666; height: 40px;">Millon Clinical Multiaxial Inventory[cite: 9].</p>
+    <button class="submit-btn" style="width:100%" onclick="window.location.href='mcmi3.html'">Start MCMI-III</button>
+</div>
+
+            </div>
+        </section>
+    </main>
+</body>
+</html>

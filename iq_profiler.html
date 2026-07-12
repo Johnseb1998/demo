@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IQ Profiler | Healing Mind</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="auth.js" defer></script>
+    <script src="iq_profiler.js" defer></script> <!-- Link to specific JS -->
+</head>
+<body>
+    <header>
+        <div class="header-left"><div class="logo">Healing Mind</div></div>
+        <nav><button class="login-btn" id="loginHeaderBtn" onclick="window.location.href='login.html'">Login</button></nav>
+    </header>
+
+    <main>
+        <section class="section">
+            <button onclick="window.location.href='assessment_hub.html'" style="margin-bottom: 20px; cursor: pointer;">&larr; Back to Hub</button>
+            
+            <div class="quiz-container" style="display: block; max-width: 800px;">
+                <h3 style="color: var(--primary); margin-top: 0;">General Abilities: Intelligence Profile</h3>
+                
+                <form id="iqForm" onsubmit="calculateIQProfile(event)">
+                    <div style="display: flex; gap: 30px;">
+                        <div style="flex: 1;">
+                            <h4>Verbal Scales</h4>
+                            <div class="form-group"><label>Information</label><input type="number" id="iq_info"></div>
+                            <div class="form-group"><label>Calculated VERBAL IQ</label><input type="number" id="verbal_iq" required></div>
+                        </div>
+                        <div style="flex: 1;">
+                            <h4>Performance Scales</h4>
+                            <div class="form-group"><label>Picture Completion</label><input type="number" id="iq_pic_comp"></div>
+                            <div class="form-group"><label>Calculated PERFORMANCE IQ</label><input type="number" id="perf_iq" required></div>
+                        </div>
+                    </div>
+
+                    <div style="background: var(--primary); color: white; padding: 20px; margin-top: 20px; text-align: center;">
+                        <label>FULL SCALE IQ</label><br>
+                        <input type="number" id="full_scale_iq" required style="font-size: 1.5rem; text-align: center;">
+                    </div>
+
+                    <button type="submit" class="submit-btn" style="width: 100%; margin-top: 20px;">Save Profile & Evaluate</button>
+                    <div id="iqResult" class="result-box" style="display: none; margin-top: 20px;"></div>
+                </form>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

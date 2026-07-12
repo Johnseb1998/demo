@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Beck Anxiety Inventory | Healing Mind</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="auth.js" defer></script>
+    <script src="bai.js" defer></script> <!-- Link to specific JS -->
+</head>
+<body>
+    <header>
+        <div class="header-left"><div class="logo">Healing Mind</div></div>
+        <nav><button class="login-btn" id="loginHeaderBtn" onclick="window.location.href='login.html'">Login</button></nav>
+    </header>
+
+    <main>
+        <section class="section">
+            <button onclick="window.location.href='assessment_hub.html'" style="margin-bottom: 20px; cursor: pointer;">&larr; Back to Hub</button>
+            
+            <div class="quiz-container" style="display: block; max-width: 800px;">
+                <h3 style="color: var(--primary); margin-top: 0;">Beck Anxiety Inventory (BAI)</h3>
+                <p>Indicate how much you have been bothered by that symptom during the past month.</p>
+                
+                <!-- JS will inject questions here -->
+                <div id="quizQuestions" style="margin-top: 20px;"></div>
+                
+                <button class="submit-btn" style="width: 100%; margin-top: 20px;" onclick="calculateBAI()">Submit BAI</button>
+                <div id="testResult" class="result-box" style="display: none; margin-top: 20px;"></div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healing Mind | Home</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
+</head>
+<body>
+
+    <!-- REUSABLE HEADER (Use this exact header on all HTML pages) -->
+    <header>
+        <div class="header-left"><div class="logo">Healing Mind</div></div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="team.html">Team</a>
+            <a href="career.html">Career</a>
+            <a id="assessmentTabNav" href="assessment.html" style="display:none;">Assessments</a>
+            <button class="login-btn" id="loginHeaderBtn" onclick="window.location.href='login.html'">Login</button>
+        </nav>
+    </header>
+
+    <!-- REUSABLE WIDGETS (Use these on all HTML pages) -->
+    <div class="fixed-appointment" onclick="handleBookingClick()">Book Appointment</div>
+    <div class="fixed-assessment-tab" onclick="window.location.href='assessment.html'">Assessments & Tests</div>
+    <div class="fixed-chat" onclick="toggleChat()">Chat with Us</div>
+
+    <!-- CHAT BOT HTML -->
+    <div class="chat-widget" id="chatWidget">
+        <div class="chat-header">Healing Mind Support</div>
+        <div class="chat-body" id="chatBody"><p><strong>Bot:</strong> Hello! How can we help you today?</p></div>
+        <div class="chat-input">
+            <input type="text" id="chatMsg" placeholder="Type a message...">
+            <button onclick="sendChat()">Send</button>
+        </div>
+    </div>
+
+    <!-- MAIN HOME CONTENT -->
+    <main>
+        <section class="section">
+            <div class="hero">
+                <h1>Healing Mind</h1>
+                <h2>Speak and Relief</h2>
+            </div>
+            
+            <div class="core-values">
+                <div class="value-box"><h3>Ethical</h3><p>Strict adherence to moral guidelines.</p></div>
+                <div class="value-box"><h3>Confidential</h3><p>Your privacy is our priority.</p></div>
+                <div class="value-box"><h3>Scientific</h3><p>Evidence-based interventions.</p></div>
+            </div>
+		
+		<h3 style="text-align: center; color: var(--primary); margin-top: 50px;">Our Therapy & Counseling Services</h3>
+            <p style="text-align: center; color: #666; margin-bottom: 30px;">We offer a comprehensive range of evidence-based psychological services tailored to your specific needs.</p>
+            
+            <div class="therapies">
+                <div class="therapy-box">
+                    <strong>Family Counseling</strong><br><br>Resolve conflicts, improve communication, and build a supportive home environment.
+                </div>
+                <div class="therapy-box">
+                    <strong>Couple Therapy</strong><br><br>Strengthen your relationship, rebuild trust, and navigate interpersonal challenges.
+                </div>
+                <div class="therapy-box">
+                    <strong>Anxiety Management</strong><br><br>Learn scientific techniques to overcome excessive worry, panic, and physical tension.
+                </div>
+                <div class="therapy-box">
+                    <strong>Depression Therapy</strong><br><br>Find emotional balance, restore motivation, and navigate feelings of hopelessness.
+                </div>
+                <div class="therapy-box">
+                    <strong>Addiction Recovery</strong><br><br>Overcome behavioral and substance dependencies with structured, empathetic support.
+                </div>
+                <div class="therapy-box">
+                    <strong>Cognitive Behavioral Therapy (CBT)</strong><br><br>Identify and restructure negative thought patterns that influence behavior.
+                </div>
+                <div class="therapy-box">
+                    <strong>Trauma & PTSD Support</strong><br><br>Safely process and heal from deeply distressing or life-threatening past experiences.
+                </div>
+                <div class="therapy-box">
+                    <strong>Child & Adolescent Counseling</strong><br><br>Developmental support for youth facing behavioral, academic, or social struggles.
+                </div>
+                <div class="therapy-box">
+                    <strong>Anger Management</strong><br><br>Develop healthy emotional regulation strategies to respond to triggers constructively.
+                </div>
+                <div class="therapy-box">
+                    <strong>Grief & Loss Counseling</strong><br><br>Navigate the complex emotional process of mourning a loved one or a major life change.
+                </div>
+                <div class="therapy-box">
+                    <strong>Stress Management</strong><br><br>Build psychological resilience to handle daily pressures and prevent burnout.
+                </div>
+                <div class="therapy-box">
+                    <strong>Mindfulness & Well-being</strong><br><br>Cultivate present-moment awareness and self-compassion for overall mental peace.
+                </div>
+            </div>
+<!-- ABOUT US SUMMARY (Added Below Therapies) -->
+            <div style="margin-top: 80px; padding: 40px; background: var(--bg-light); border-radius: 8px; border-left: 5px solid var(--accent); box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                <h3 style="color: var(--primary); font-size: 2rem; margin-top: 0; text-align: center;">About Healing Mind</h3>
+                
+                <div style="display: flex; flex-wrap: wrap; gap: 30px; margin-top: 30px;">
+                    <!-- Founder Info -->
+                    <div style="flex: 1; min-width: 250px;">
+                        <h4 style="color: var(--accent); font-size: 1.2rem; margin-bottom: 10px;">Meet the Founder</h4>
+                        <p><strong>John Sebastian</strong></p>
+                        <p style="color: #555; line-height: 1.6;">Dedicated to bringing scientific psychology to everyday wellness, John established Healing Mind to bridge the gap between clinical psychological practices and accessible mental health care. We provide a stigma-free environment for holistic healing.</p>
+                        <button class="submit-btn" style="margin-top: 10px; background-color: transparent; color: var(--primary); border: 1px solid var(--primary);" onclick="window.location.href='about.html'">Read Full Story</button>
+                    </div>
+
+                    <!-- Vision & Mission -->
+                    <div style="flex: 1; min-width: 250px;">
+                        <h4 style="color: var(--primary); font-size: 1.2rem; margin-bottom: 10px;">Our Vision</h4>
+                        <p style="color: #555; line-height: 1.6; margin-bottom: 20px;">To be a global sanctuary for mental wellness and psychological empowerment, where every individual has the tools to achieve inner peace.</p>
+                        
+                        <h4 style="color: var(--primary); font-size: 1.2rem; margin-bottom: 10px;">Our Mission</h4>
+                        <p style="color: #555; line-height: 1.6;">To deliver ethical, confidential, and scientifically-backed counseling services to every individual in need, fostering a safe space for self-discovery and long-term well-being.</p>
+                    </div>
+                </div>
+            </div>
+                    </section>
+
+<!-- FOOTER SECTION -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            
+            <!-- Column 1: Website Links -->
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="team.html">Our Team</a>
+                <a href="career.html">Careers</a>
+                <a href="assessment.html">Psychological Assessments</a>
+                <a href="login.html">Login / Register</a>
+            </div>
+
+            <!-- Column 2: Contact Information -->
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <p><strong>Office Address:</strong><br>Healing Mind Psychology Center<br>405 Wellness Avenue, Block C<br>City District, 10001</p>
+                <p><strong>Email:</strong><br><a href="mailto:support@healingmind.com">support@healingmind.com</a></p>
+                <p><strong>Phone:</strong><br><a href="tel:+919876543210">+91 98765 43210</a></p>
+                <p><strong>Location Options:</strong><br>In-person sessions & Secure Online Video Counseling available globally.</p>
+            </div>
+
+            <!-- Column 3: National Helplines (Vertical Scroll) -->
+            <div class="footer-col">
+                <h4>National Helplines (24/7)</h4>
+                <p style="font-size: 0.8rem; color: #aaa; margin-top: -10px;">Hover to pause</p>
+                
+                <div class="scrolling-wrapper">
+                    <div class="scrolling-content">
+                        <div class="helpline-item">
+                            <strong>Mental Health Helpline (KIRAN):</strong> 
+                            1800-599-0019
+                        </div>
+                        <div class="helpline-item">
+                            <strong>DISHA (Mental Health Support):</strong> 
+                            1056
+                        </div>
+                        <div class="helpline-item">
+                            <strong>Suicide Prevention (AASRA):</strong> 
+                            +91-9820466726
+                        </div>
+                        <div class="helpline-item">
+                            <strong>Women in Distress:</strong> 
+                            1091
+                        </div>
+                        <div class="helpline-item">
+                            <strong>Childline India:</strong> 
+                            1098
+                        </div>
+                        <div class="helpline-item">
+                            <strong>Police / Emergency:</strong> 
+                            112 / 100
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        <div class="footer-bottom">
+            &copy; 2026 Healing Mind Psychological Counseling. Ethical, Confidential, Scientific.
+        </div>
+    </footer>
+
+    </main>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healing Mind | Psychological Assessments</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
+</head>
+<body>
+
+    <!-- REUSABLE HEADER -->
+    <header>
+        <div class="header-left"><div class="logo">Healing Mind</div></div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="team.html">Team</a>
+            <a href="career.html">Career</a>
+            <a id="assessmentTabNav" href="assessment.html" style="color: var(--accent); display:none;">Assessments</a>
+            <button class="login-btn" id="loginHeaderBtn" onclick="window.location.href='login.html'">Login</button>
+        </nav>
+    </header>
+
+    <!-- REUSABLE WIDGETS -->
+    <div class="fixed-appointment" onclick="handleBookingClick()">Book Appointment</div>
+    <!-- No need for the assessment side-tab here since we are already on the assessment page -->
+    <div class="fixed-chat" onclick="toggleChat()">Chat with Us</div>
+
+    <!-- CHAT BOT HTML -->
+    <div class="chat-widget" id="chatWidget">
+        <div class="chat-header">Healing Mind Support</div>
+        <div class="chat-body" id="chatBody"><p><strong>Bot:</strong> Hello! How can we help you today?</p></div>
+        <div class="chat-input">
+            <input type="text" id="chatMsg" placeholder="Type a message...">
+            <button onclick="sendChat()">Send</button>
+        </div>
+    </div>
+
+<!-- MAIN ASSESSMENT CONTENT -->
+    <main>
+        <section class="section">
+            <h2 style="color: var(--primary); text-align: center; font-size: 2.5rem; margin-bottom: 10px;">Comprehensive Assessment Center</h2>
+            
+            <div id="testSelection" style="max-width: 1000px; margin: 0 auto;">
+                <p style="text-align: center; color: #666; margin-bottom: 30px;">Select a category and tool below. Results are calculated instantly and stored securely in your clinical file.</p>
+                
+                <!-- Category Tabs -->
+                <div class="tab-container" style="display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; flex-wrap: wrap;">
+                    <button class="tab-btn active" onclick="openTab(event, 'mood')">Mood & Anxiety</button>
+                    <button class="tab-btn" onclick="openTab(event, 'personality')">Personality</button>
+                    <button class="tab-btn" onclick="openTab(event, 'clinical')">Clinical & Trauma</button>
+                    <button class="tab-btn" onclick="openTab(event, 'neuro')">Neuro & Projective</button>
+                </div>
+
+                <!-- TAB 1: Mood & Anxiety -->
+                <div id="mood" class="tab-content active-tab" style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
+                    <div class="therapy-box"><h4>GAD-7</h4><p>General Anxiety Disorder</p><button class="submit-btn" onclick="startTest('gad7')">Start</button></div>
+                    <div class="therapy-box"><h4>Perceived Stress (PSS)</h4><p>Stress coping levels</p><button class="submit-btn" onclick="startTest('stress')">Start</button></div>
+                    <div class="therapy-box"><h4>BDI & BDI-II</h4><p>Beck Depression Inventory</p><button class="submit-btn" onclick="startTest('bdi2')">Start</button></div>
+                    <div class="therapy-box"><h4>HAM-A / HAM-D</h4><p>Hamilton Rating Scales</p><button class="submit-btn" onclick="startTest('ham')">Start</button></div>
+                    <div class="therapy-box"><h4>EPDS</h4><p>Postnatal Depression</p><button class="submit-btn" onclick="startTest('epds')">Start</button></div>
+                </div>
+
+                <!-- TAB 2: Personality -->
+                <div id="personality" class="tab-content" style="display: none; flex-wrap: wrap; gap: 15px; justify-content: center;">
+                    <div class="therapy-box"><h4>16 PF</h4><p>16 Personality Factors</p><button class="submit-btn" onclick="startTest('16pf')">Start</button></div>
+                    <div class="therapy-box"><h4>Big 5 Inventory</h4><p>OCEAN Traits</p><button class="submit-btn" onclick="startTest('big5')">Start</button></div>
+                    <div class="therapy-box"><h4>NEO PI</h4><p>NEO Personality Inventory</p><button class="submit-btn" onclick="startTest('neopi')">Start</button></div>
+                    <div class="therapy-box"><h4>EPQ</h4><p>Eysenck Personality</p><button class="submit-btn" onclick="startTest('epq')">Start</button></div>
+                </div>
+
+                <!-- TAB 3: Clinical & Trauma -->
+                <div id="clinical" class="tab-content" style="display: none; flex-wrap: wrap; gap: 15px; justify-content: center;">
+                    <div class="therapy-box"><h4>MMPI</h4><p>Minnesota Multiphasic</p><button class="submit-btn" onclick="startTest('mmpi')">Start</button></div>
+                    <div class="therapy-box"><h4>PCL-5</h4><p>PTSD Checklist</p><button class="submit-btn" onclick="startTest('pcl5')">Start</button></div>
+                    <div class="therapy-box"><h4>Y-BOCS</h4><p>Obsessive Compulsive Scale</p><button class="submit-btn" onclick="startTest('ybocs')">Start</button></div>
+                </div>
+
+                <!-- TAB 4: Neuro, Developmental & Projective -->
+                <div id="neuro" class="tab-content" style="display: none; flex-wrap: wrap; gap: 15px; justify-content: center;">
+                    <div class="therapy-box"><h4>ASRS</h4><p>Adult ADHD Screener</p><button class="submit-btn" onclick="startTest('asrs')">Start</button></div>
+                    <div class="therapy-box"><h4>RAADS-R</h4><p>Autism Spectrum (Adult)</p><button class="submit-btn" onclick="startTest('raads')">Start</button></div>
+                    <div class="therapy-box"><h4>WAIS-IV</h4><p>Intelligence Scale</p><button class="submit-btn" onclick="startTest('wais')">Start</button></div>
+                    <div class="therapy-box"><h4>VSMS</h4><p>Vineland Social Maturity</p><button class="submit-btn" onclick="startTest('vsms')">Start</button></div>
+                    <div class="therapy-box"><h4>NIMHANS Battery</h4><p>Neuropsychological</p><button class="submit-btn" onclick="startTest('nimhans')">Start</button></div>
+                    <div class="therapy-box"><h4>TAT</h4><p>Thematic Apperception</p><button class="submit-btn" onclick="startTest('tat')">Start</button></div>
+                </div>
+            </div>
+
+            <!-- Active Quiz Interface -->
+            <div id="activeTest" class="quiz-container">
+                <h3 id="testTitle" style="color: var(--primary); margin-top: 0; border-bottom: 2px solid var(--accent); padding-bottom: 10px;"></h3>
+                <div id="testInstructions" style="color: #555; line-height: 1.5; margin-bottom: 20px;"></div>
+                
+                <div id="quizQuestions" style="margin-top: 20px;"></div>
+                
+                <div style="display: flex; gap: 15px; margin-top: 30px;">
+                    <button class="submit-btn" style="flex: 2; font-size: 1.1rem;" onclick="calculateResult()">Submit</button>
+                    <button class="submit-btn" style="flex: 1; background-color: #eee; color: #333; border: 1px solid #ccc;" onclick="closeTest()">Cancel</button>
+                </div>
+                
+                <div id="testResult" class="result-box"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Add this quick script right here to handle the tabs -->
+    <script>
+        function openTab(evt, categoryName) {
+            let tabcontent = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            let tablinks = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+                tablinks[i].style.backgroundColor = "transparent";
+                tablinks[i].style.color = "var(--primary)";
+            }
+            document.getElementById(categoryName).style.display = "flex";
+            evt.currentTarget.className += " active";
+            evt.currentTarget.style.backgroundColor = "var(--primary)";
+            evt.currentTarget.style.color = "white";
+        }
+    </script>
+
+</body>
+</html>

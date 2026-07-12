@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healing Mind | Login & Registration</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
+    <style>
+        .auth-container {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-top: 5px solid var(--accent);
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .form-section { display: none; }
+        .form-section.active { display: block; }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .form-group { display: flex; flex-direction: column; }
+        .form-group label { margin-bottom: 5px; font-size: 0.9rem; font-weight: bold; color: var(--primary); }
+        .form-group.full-width { grid-column: span 2; }
+        
+        .checkbox-group { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 15px; font-size: 0.9rem; }
+        .checkbox-group input { margin-top: 3px; }
+        
+        .condition-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            background: var(--bg-light);
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- REUSABLE HEADER -->
+    <header>
+        <div class="header-left"><div class="logo">Healing Mind</div></div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="team.html">Team</a>
+            <a href="career.html">Career</a>
+            <a id="assessmentTabNav" href="assessment.html" style="display:none;">Assessments</a>
+            <button class="login-btn" id="loginHeaderBtn" onclick="window.location.href='login.html'" style="background-color: var(--accent); color: var(--primary);">Login</button>
+        </nav>
+    </header>
+
+    <!-- MAIN AUTHENTICATION CONTENT -->
+    <main>
+        <section class="section" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            
+            <div class="auth-container">
+                
+                <!-- VIEW 1: LOGIN -->
+                <div id="view-login" class="form-section active">
+                    <h2 style="color: var(--primary); text-align: center; margin-top: 0;">Patient Portal Login</h2>
+                    <p style="text-align: center; color: #666; margin-bottom: 25px;">Log in securely using your Phone Number, OTP, or Passkey.</p>
+                    
+                    <form onsubmit="requestOTP(event)" id="phoneForm" style="width: 100%; margin: 0;">
+                        <div class="form-group full-width">
+                            <label>Registered Phone Number</label>
+                            <input type="tel" id="loginPhone" placeholder="+91 XXXXX XXXXX" required style="width: 95%;">
+                        </div>
+                        <button type="submit" class="submit-btn" style="width: 100%; margin-top: 15px; font-size: 1.1rem;">Request OTP / Use Passkey</button>
+                    </form>
+
+                    <form onsubmit="verifyLogin(event)" id="otpForm" style="width: 100%; margin: 0; display: none; margin-top: 20px;">
+                        <div class="form-group full-width">
+                            <label>Enter 6-Digit OTP</label>
+                            <input type="number" id="loginOTP" placeholder="------" required style="width: 95%; text-align: center; letter-spacing: 5px; font-size: 1.2rem;">
+                        </div>
+                        <button type="submit" class="submit-btn" style="width: 100%; margin-top: 15px; font-size: 1.1rem; background-color: #4CAF50; color: white;">Verify & Login</button>
+                    </form>
+
+                    <p style="text-align: center; margin-top: 30px; font-size: 0.95rem; color: #666;">
+                        New to Healing Mind? <a href="#" onclick="switchView('view-register-1')" style="color: var(--accent); font-weight: bold; text-decoration: none;">Create an Account</a>
+                    </p>
+                </div>
+
+                <!-- VIEW 2: REGISTRATION STEP 1 (Demographics) -->
+                <div id="view-register-1" class="form-section">
+                    <h2 style="color: var(--primary); margin-top: 0;">Sign Up - Step 1</h2>
+                    <p style="color: #666; margin-bottom: 25px;">Personal & Demographic Information</p>
+                    
+                    <form id="regFormStep1" onsubmit="goToStep2(event)">
+                        <div class="form-grid">
+                            <div class="form-group full-width">
+                                <label>Full Name</label>
+                                <input type="text" id="regName" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Age</label>
+                                <input type="number" id="regAge" min="18" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Biological Sex</label>
+                                <select id="regSex" onchange="checkFemaleHealth()" required>
+                                    <option value="">Select...</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Intersex">Intersex</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Gender Identity</label>
+                                <input type="text" id="regGender" placeholder="e.g., Man, Woman, Non-binary" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Marital Status</label>
+                                <select id="regMarital" required>
+                                    <option value="">Select...</option>
+                                    <option value="Single">Single</option>
+                                    <option value="Married">Married</option>
+                                    <option value="Divorced">Divorced</option>
+                                    <option value="Widowed">Widowed</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>City</label>
+                                <input type="text" id="regCity" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Pincode / Zip</label>
+                                <input type="number" id="regPin" required>
+                            </div>
+                            <div class="form-group full-width">
+                                <label>Occupation / Job Title</label>
+                                <input type="text" id="regJob" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Languages Spoken</label>
+                                <input type="text" id="regLangSpoken" placeholder="e.g., English, Hindi, Tamil" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Preferred Therapy Language</label>
+                                <input type="text" id="regLangPref" required>
+                            </div>
+                        </div>
+
+                        <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+                        
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="agreeTerms" required>
+                            <label for="agreeTerms">I agree to the Terms and Conditions of service.</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="agreeConfidentiality" required>
+                            <label for="agreeConfidentiality">I sign the Confidentiality Agreement regarding my clinical data.</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="agreeMentalHealth" required>
+                            <label for="agreeMentalHealth">I agree to the mental health legal parameters, acknowledging this platform is not for acute emergency psychiatric crisis intervention.</label>
+                        </div>
+
+                        <div style="display: flex; gap: 15px; margin-top: 20px;">
+                            <button type="button" class="submit-btn" style="flex: 1; background: #ccc; color: #333;" onclick="switchView('view-login')">Back to Login</button>
+                            <button type="submit" class="submit-btn" style="flex: 2;">Continue to Health Profile</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- VIEW 3: REGISTRATION STEP 2 (Health Info) -->
+                <div id="view-register-2" class="form-section">
+                    <h2 style="color: var(--primary); margin-top: 0;">Sign Up - Step 2</h2>
+                    <p style="color: #666; margin-bottom: 25px;">Medical & Mental Health History</p>
+                    
+                    <form id="regFormStep2" onsubmit="submitRegistration(event)">
+                        
+                        <label style="font-weight: bold; color: var(--primary); font-size: 0.9rem;">Pre-existing Conditions (Select all that apply)</label>
+                        <div class="condition-grid">
+                            <label><input type="checkbox" value="Diabetes" class="health-condition"> Diabetes</label>
+                            <label><input type="checkbox" value="Thyroid" class="health-condition"> Thyroid</label>
+                            <label><input type="checkbox" value="BP" class="health-condition"> Hypertension (BP)</label>
+                            <label><input type="checkbox" value="Cholesterol" class="health-condition"> Cholesterol</label>
+                            <label><input type="checkbox" value="Epilepsy" class="health-condition"> Epilepsy</label>
+                            <label><input type="checkbox" value="Brain Injury" class="health-condition"> Brain Injury</label>
+                            <label><input type="checkbox" value="Physical Surgery" class="health-condition"> Prior Surgery</label>
+                        </div>
+
+                        <div class="form-group full-width" style="margin-bottom: 15px;">
+                            <label>Current Daily Medications (If any)</label>
+                            <textarea id="regMeds" rows="2" placeholder="List medications and dosages..."></textarea>
+                        </div>
+
+                        <!-- FEMALE SPECIFIC HEALTH SECTION (Hidden by default) -->
+                        <div id="femaleHealthSection" style="display: none; background: #fdf5f9; padding: 15px; border-left: 4px solid #e04a8b; border-radius: 4px; margin-bottom: 15px;">
+                            <h4 style="margin-top: 0; color: #e04a8b;">Female Health Profile</h4>
+                            <div class="form-group full-width" style="margin-bottom: 10px;">
+                                <label>Menstrual Cycle Regularity</label>
+                                <select id="regMenstrualCycle">
+                                    <option value="Regular">Regular</option>
+                                    <option value="Irregular">Irregular</option>
+                                    <option value="Menopause">Menopause / Post-Menopause</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group full-width">
+                                <label>Any Menstrual Complications? (PCOS, Endometriosis, severe PMS/PMDD)</label>
+                                <textarea id="regMenstrualComplications" rows="2" placeholder="Describe any issues..."></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width" style="margin-bottom: 15px;">
+                            <label>Family Medical History</label>
+                            <textarea id="regFamilyMedical" rows="2" placeholder="E.g., Heart disease, Alzheimer's..."></textarea>
+                        </div>
+
+                        <div class="form-group full-width" style="margin-bottom: 15px;">
+                            <label>Family Mental Health History</label>
+                            <textarea id="regFamilyMental" rows="2" placeholder="E.g., Depression, Schizophrenia, Bipolar..."></textarea>
+                        </div>
+
+                        <div style="display: flex; gap: 15px; margin-top: 25px;">
+                            <button type="button" class="submit-btn" style="flex: 1; background: #ccc; color: #333;" onclick="switchView('view-register-1')">Back</button>
+                            <button type="submit" class="submit-btn" style="flex: 2; background-color: #4CAF50; color: white;">Complete Registration</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER SECTION (Keep your existing footer here) -->
+    <footer class="site-footer">
+        <!-- ... your footer code ... -->
+        <div class="footer-bottom">
+            &copy; 2026 Healing Mind Psychological Counseling. Ethical, Confidential, Scientific.
+        </div>
+    </footer>
+
+    <!-- LOCAL PAGE JAVASCRIPT FOR AUTH & REGISTRATION LOGIC -->
+    <script>
+        // Data storage object for the multi-step form
+        let registrationData = {};
+
+        // --- VIEW SWITCHING ---
+        function switchView(viewId) {
+            document.querySelectorAll('.form-section').forEach(sec => sec.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+            window.scrollTo(0,0);
+        }
+
+        // --- LOGIN LOGIC (Simulated OTP/Passkey) ---
+        function requestOTP(e) {
+            e.preventDefault();
+            const phone = document.getElementById('loginPhone').value;
+            if(phone.length > 5) {
+                document.getElementById('phoneForm').style.display = 'none';
+                document.getElementById('otpForm').style.display = 'block';
+                // In production, trigger backend API to send SMS here
+                alert(`Passkey / OTP sent to ${phone}`);
+            }
+        }
+
+        function verifyLogin(e) {
+            e.preventDefault();
+            const otp = document.getElementById('loginOTP').value;
+            if(otp) {
+                // Interacts with your existing main.js login state
+                localStorage.setItem("isLoggedIn", "true");
+                alert("Authentication Successful!");
+                window.location.href = "index.html"; 
+            }
+        }
+
+        // --- REGISTRATION LOGIC ---
+        function checkFemaleHealth() {
+            const sex = document.getElementById('regSex').value;
+            const femaleSection = document.getElementById('femaleHealthSection');
+            if (sex === 'Female') {
+                femaleSection.style.display = 'block';
+            } else {
+                femaleSection.style.display = 'none';
+                // Clear the fields if they changed their mind
+                document.getElementById('regMenstrualCycle').value = 'Regular';
+                document.getElementById('regMenstrualComplications').value = '';
+            }
+        }
+
+        function goToStep2(e) {
+            e.preventDefault();
+            
+            // Collect Step 1 Data
+            registrationData = {
+                name: document.getElementById('regName').value,
+                age: document.getElementById('regAge').value,
+                biological_sex: document.getElementById('regSex').value,
+                gender_identity: document.getElementById('regGender').value,
+                marital_status: document.getElementById('regMarital').value,
+                city: document.getElementById('regCity').value,
+                pincode: document.getElementById('regPin').value,
+                occupation: document.getElementById('regJob').value,
+                languages_spoken: document.getElementById('regLangSpoken').value,
+                language_preference: document.getElementById('regLangPref').value,
+                agreements_signed: true
+            };
+
+            switchView('view-register-2');
+        }
+
+        async function submitRegistration(e) {
+            e.preventDefault();
+
+            // Collect Pre-existing conditions (Checkboxes)
+            let conditions = [];
+            document.querySelectorAll('.health-condition:checked').forEach(cb => {
+                conditions.push(cb.value);
+            });
+
+            // Collect Step 2 Data and merge with Step 1
+            registrationData.medical_history = {
+                pre_existing_conditions: conditions,
+                daily_medications: document.getElementById('regMeds').value,
+                family_medical_history: document.getElementById('regFamilyMedical').value,
+                family_mental_health_history: document.getElementById('regFamilyMental').value
+            };
+
+            // Collect Female specific data if applicable
+            if (registrationData.biological_sex === 'Female') {
+                registrationData.medical_history.female_health = {
+                    menstrual_cycle: document.getElementById('regMenstrualCycle').value,
+                    complications: document.getElementById('regMenstrualComplications').value
+                };
+            }
+
+            // --- SEND DATA TO SERVER ---
+            try {
+                // Change '/api/register_patient' to your Python/PHP endpoint
+                const response = await fetch('/api/register_patient', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(registrationData)
+                });
+
+                // Simulate success for this demo even if backend isn't connected yet
+                localStorage.setItem("isLoggedIn", "true");
+                alert("Registration Complete! Your clinical profile has been securely created. Welcome to Healing Mind.");
+                window.location.href = "index.html";
+                
+            } catch (error) {
+                console.error("Error saving patient data:", error);
+                alert("Network error connecting to the secure server. Please try again.");
+            }
+        }
+    </script>
+</body>
+</html>
